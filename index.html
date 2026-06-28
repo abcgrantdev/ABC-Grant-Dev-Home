@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ABC Grant Dev (Pty) Ltd | App Development</title>
+  <meta name="description" content="ABC Grant Dev (Pty) Ltd builds modern mobile apps, web apps, and digital products." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07111f;
+      --card: rgba(255,255,255,0.08);
+      --card-border: rgba(255,255,255,0.16);
+      --text: #f7fbff;
+      --muted: #b8c6d8;
+      --accent: #64f4ac;
+      --accent-2: #6aa9ff;
+      --shadow: 0 24px 80px rgba(0,0,0,0.36);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(100,244,172,.20), transparent 30%),
+        radial-gradient(circle at 84% 18%, rgba(106,169,255,.22), transparent 34%),
+        linear-gradient(135deg, #06101d 0%, #0b1629 45%, #07111f 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), transparent 75%);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      font-size: 20px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: #06101d;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 14px 40px rgba(100,244,172,.22);
+      font-weight: 900;
+    }
+
+    nav { display: flex; gap: 22px; align-items: center; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    nav a:hover { color: var(--text); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 48px;
+      align-items: center;
+      padding: 84px 0 70px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.07);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 999px;
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    h1 {
+      margin: 24px 0 18px;
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: .95;
+      letter-spacing: -0.075em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 650px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.65;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary {
+      color: #06101d;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 18px 44px rgba(100,244,172,.18);
+    }
+    .btn.secondary {
+      color: var(--text);
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,.06);
+    }
+
+    .panel {
+      border: 1px solid var(--card-border);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.055));
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      right: -70px;
+      top: -70px;
+      border-radius: 999px;
+      background: rgba(100,244,172,.16);
+      filter: blur(10px);
+    }
+
+    .device {
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 24px;
+      background: rgba(6,16,29,.84);
+      padding: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .bar {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+    .bar span { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,.28); }
+
+    .mock-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.12);
+      margin-bottom: 14px;
+    }
+    .mock-card strong { display: block; margin-bottom: 8px; }
+    .mock-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .line { height: 9px; border-radius: 999px; background: rgba(255,255,255,.12); margin-top: 12px; overflow: hidden; }
+    .line span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+    section { padding: 58px 0; }
+
+    .section-head { max-width: 720px; margin-bottom: 24px; }
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -0.055em;
+    }
+    .section-head p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service {
+      border: 1px solid var(--card-border);
+      background: var(--card);
+      border-radius: 24px;
+      padding: 22px;
+      min-height: 190px;
+      backdrop-filter: blur(12px);
+    }
+    .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(100,244,172,.13);
+      margin-bottom: 18px;
+      font-size: 22px;
+    }
+    .service h3 { margin: 0 0 10px; font-size: 18px; }
+    .service p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 15px; }
+
+    .cta {
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, rgba(100,244,172,.14), rgba(106,169,255,.14));
+      border-radius: 30px;
+      padding: 34px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    .cta h2 { margin: 0 0 8px; letter-spacing: -0.045em; font-size: clamp(26px, 4vw, 38px); }
+    .cta p { margin: 0; color: var(--muted); line-height: 1.6; }
+
+    footer {
+      padding: 36px 0 44px;
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+
+    @media (max-width: 850px) {
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 48px; }
+      .grid { grid-template-columns: 1fr; }
+      .cta { flex-direction: column; align-items: flex-start; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">AG</div>
+        <span>ABC Grant Dev</span>
+      </div>
+      <nav aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="mailto:hello@abcgrantdev.com">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> New digital product studio</div>
+          <h1>Building practical apps for <span class="gradient-text">real-world ideas.</span></h1>
+          <p class="lead">ABC Grant Dev (Pty) Ltd is a South African app-development company focused on mobile apps, web platforms, automation, and modern digital tools for businesses and creators.</p>
+          <div class="actions">
+            <a class="btn primary" href="mailto:hello@abcgrantdev.com">Get in touch</a>
+            <a class="btn secondary" href="#services">What we do</a>
+          </div>
+        </div>
+
+        <div class="panel" aria-label="Product preview graphic">
+          <div class="device">
+            <div class="bar"><span></span><span></span><span></span></div>
+            <div class="mock-card">
+              <strong>Mobile-first products</strong>
+              <p>Clean, reliable apps designed around simple user experiences.</p>
+              <div class="line"><span style="width: 82%"></span></div>
+            </div>
+            <div class="mock-card">
+              <strong>Cloud-connected systems</strong>
+              <p>From idea to database, backend, auth, payments, and deployment.</p>
+              <div class="line"><span style="width: 64%"></span></div>
+            </div>
+            <div class="mock-card">
+              <strong>Built to launch</strong>
+              <p>Temporary landing page today. Full product tomorrow.</p>
+              <div class="line"><span style="width: 74%"></span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-head">
+          <h2>What we do</h2>
+          <p>We help turn early-stage ideas into polished, usable software — starting lean, validating quickly, and building foundations that can grow.</p>
+        </div>
+        <div class="grid">
+          <article class="service">
+            <div class="icon">📱</div>
+            <h3>Mobile app development</h3>
+            <p>iOS and Android apps with modern interfaces, cloud backends, user accounts, notifications, and app-store readiness.</p>
+          </article>
+          <article class="service">
+            <div class="icon">🌐</div>
+            <h3>Web apps & landing pages</h3>
+            <p>Fast websites, customer portals, admin dashboards, and launch pages that explain your product clearly.</p>
+          </article>
+          <article class="service">
+            <div class="icon">⚙️</div>
+            <h3>Automation & integrations</h3>
+            <p>Practical tooling that connects systems, reduces manual work, and helps small businesses operate more efficiently.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="cta">
+          <div>
+            <h2>Website coming soon.</h2>
+            <p>We are preparing our full company site. For project enquiries, partnerships, or general contact, reach out by email.</p>
+          </div>
+          <a class="btn primary" href="mailto:hello@abcgrantdev.com">hello@abcgrantdev.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> ABC Grant Dev (Pty) Ltd. All rights reserved.</span>
+      <span>App development • Web platforms • Digital products</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
